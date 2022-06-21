@@ -49,6 +49,8 @@ function saveInventoryItem(item: InventoryItem) {
 
 let inventoryItem = getInventoryItem(trackingNumber);
 
+let updatedInventoryItem = inventoryItem;
+
 inventoryItem.createDate = new Date();
 
 saveInventoryItem({
@@ -57,3 +59,19 @@ saveInventoryItem({
   trackingNumber: "B123",
   createDate: new Date(),
 });
+
+function clone<T, U>(source: T, options: U): T {
+  const serialized = JSON.stringify(source);
+  return JSON.parse(serialized)
+}
+
+const cloned = clone(inventoryItem, { deep: true});
+
+// Reusing logic with generics 
+class KeyValuePair<TKey, TValue> { // or can use with interface
+  Key: TKey;
+  Value: TValue;
+}
+
+let keyValue: KeyValuePair<string, number> = { Key: "something", Value: 1234 };
+let keyValue2: KeyValuePair<number, boolean> = { Key: 1234, Value: true };

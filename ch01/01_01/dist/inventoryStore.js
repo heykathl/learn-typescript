@@ -1,81 +1,68 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var InventoryStore = /** @class */ (function () {
+class InventoryStore {
+    // Declaring types to variables and initializing them
+    _categories = [];
+    _items = [];
+    _isInitialized;
+    /** the inventory categories */
+    // Functions with a 'get' to behave like properties
+    get categories() {
+        return this._categories;
+    }
+    /** the inventory items */
+    get items() {
+        return this._items;
+    }
+    // Can access them like this - this.items
+    // Assign them using setters
+    // set items(value) {
+    //   this._items = value
+    // }
+    /** promise indicating whether the store has been initialized */
+    get isInitialized() {
+        return this._isInitialized;
+    }
     // Called when initialized 
-    function InventoryStore() {
-        // Declaring types to variables and initializing them
-        this._categories = [];
-        this._items = [];
+    constructor() {
         // load initial set of data
         this._isInitialized = this._load();
     }
-    Object.defineProperty(InventoryStore.prototype, "categories", {
-        /** the inventory categories */
-        // Functions with a 'get' to behave like properties
-        get: function () {
-            return this._categories;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(InventoryStore.prototype, "items", {
-        /** the inventory items */
-        get: function () {
-            return this._items;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(InventoryStore.prototype, "isInitialized", {
-        // Can access them like this - this.items
-        // Assign them using setters
-        // set items(value) {
-        //   this._items = value
-        // }
-        /** promise indicating whether the store has been initialized */
-        get: function () {
-            return this._isInitialized;
-        },
-        enumerable: false,
-        configurable: true
-    });
     /**
      * Locates a specific item from inventory
      *
      * @param {string} trackingNumber the item's tracking number
      * @returns the inventory item with the given tracking number, or null
      */
-    InventoryStore.prototype.getItem = function (trackingNumber) {
-        return this._items.find(function (x) { return x.trackingNumber === trackingNumber; });
-    };
+    getItem(trackingNumber) {
+        return this._items.find(x => x.trackingNumber === trackingNumber);
+    }
     /**
      * Adds an item to inventory
      *
      * @param {InventoryItem} item the item to add to inventory
      * @returns {Promise<InventoryItem>} promise containing the updated item after it's been saved
      */
-    InventoryStore.prototype.addItem = function (item) {
-        var errors = this.validateItem(item);
+    addItem(item) {
+        const errors = this.validateItem(item);
         if (errors.length) {
             return Promise.reject(errors);
         }
-        var trackingNumber = Math.random()
+        const trackingNumber = Math.random()
             .toString(36)
             .substr(2, 9);
         item.trackingNumber = trackingNumber;
         this._items.push(item);
-        return this._save().then(function () { return item; });
-    };
+        return this._save().then(() => item);
+    }
     /**
      * validate an inventory item
      *
      * @param {InventoryItem} item the inventory item to validate
      * @returns {ValidationError[]} an array of validation errors
      */
-    InventoryStore.prototype.validateItem = function (item) {
-        var errors = [];
+    validateItem(item) {
+        let errors = [];
         function addError(field, message) {
-            errors.push({ field: field, message: message });
+            errors.push({ field, message });
         }
         //#region Validation logic applying to any/all types of inventory items
         if (item == null) {
@@ -116,7 +103,7 @@ var InventoryStore = /** @class */ (function () {
                 break;
         }
         return errors;
-    };
+    }
     /**
      * Removes an item from inventory
      *
@@ -124,10 +111,10 @@ var InventoryStore = /** @class */ (function () {
      * @returns {Promise<void>} a promise which resolves once the task is complete
      *
      */
-    InventoryStore.prototype.removeItem = function (item) {
+    removeItem(item) {
         this._items.splice(this._items.findIndex(item), 1);
         return this._save();
-    };
+    }
     //#region Private methods
     /*  NOTE:
      *  This demo uses local storage to save and load inventory items,
@@ -141,17 +128,15 @@ var InventoryStore = /** @class */ (function () {
      * @private  <-- just information, doesn't actually do anything at runtime
      */
     // Methods are functions that contain logic, it can access all of the internals of the class, rep like 'this' keyword
-    InventoryStore.prototype._load = function () {
-        var _this = this;
+    _load() {
         return Promise.all([
             getFromStorage("Categories"),
             getFromStorage("Inventory")
-        ]).then(function (_a) {
-            var categories = _a[0], items = _a[1];
-            _this._categories = categories;
-            _this._items = items;
+        ]).then(([categories, items]) => {
+            this._categories = categories;
+            this._items = items;
         });
-    };
+    }
     /**
      * Save the inventory items to the data source
      *
@@ -159,13 +144,10 @@ var InventoryStore = /** @class */ (function () {
      *
      * @private  <-- just information, doesn't actually do anything at runtime
      */
-    InventoryStore.prototype._save = function () {
+    _save() {
         return saveToStorage("Inventory", this._items);
-    };
+    }
     //#endregion
     // Create statis singleton instance for the entire application to use
-    InventoryStore.instance = new InventoryStore();
-    return InventoryStore;
-}());
-// Expose the singleton as the default export
-exports.default = InventoryStore.instance;
+    static instance = new InventoryStore();
+}

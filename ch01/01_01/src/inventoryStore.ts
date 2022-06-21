@@ -10,9 +10,9 @@
   class InventoryStore {
 
   // Declaring types to variables and initializing them
-  _categories: Category[] = [];
-  _items: InventoryItem[] = [];
-  _isInitialized: Promise<boolean>;
+  private _categories: Category[] = [];
+  private _items: InventoryItem[] = [];
+  private _isInitialized: Promise<boolean>;
 
   /** the inventory categories */
   // Functions with a 'get' to behave like properties
@@ -174,7 +174,7 @@
 
   // Methods are functions that contain logic, it can access all of the internals of the class, rep like 'this' keyword
 
-  _load() {
+  protected _load() {
     return Promise.all([
       getFromStorage("Categories"),
       getFromStorage("Inventory")
@@ -191,7 +191,7 @@
    *
    * @private  <-- just information, doesn't actually do anything at runtime
    */
-  _save() {
+  protected _save() {
     return saveToStorage("Inventory", this._items);
   }
 
@@ -200,6 +200,3 @@
   // Create statis singleton instance for the entire application to use
   static instance = new InventoryStore()
 }
-
-// Expose the singleton as the default export
-export default InventoryStore.instance;
