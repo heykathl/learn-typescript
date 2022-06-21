@@ -75,3 +75,6 @@ class KeyValuePair<TKey, TValue> { // or can use with interface
 
 let keyValue: KeyValuePair<string, number> = { Key: "something", Value: 1234 };
 let keyValue2: KeyValuePair<number, boolean> = { Key: 1234, Value: true };
+
+// Let TS know about it
+declare let Vue: any;

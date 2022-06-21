@@ -1,16 +1,16 @@
-let displayName = "Jess's standing desk";
-let inventoryType = "furniture";
-let trackingNumber = "FD123455";
-let createDate = new Date();
+var displayName = "Jess's standing desk";
+var inventoryType = "furniture";
+var trackingNumber = "FD123455";
+var createDate = new Date();
 // let originalCost: Cost = 425;
 // originalCost = "More spenny"
 // To reassign type but not declare value
-let originalCost;
+var originalCost;
 if (typeof originalCost === "number") {
-    let cost = originalCost;
+    var cost = originalCost;
 }
 else {
-    let x = originalCost; // which is originally a string
+    var x = originalCost; // which is originally a string
 }
 // Restricting values
 var InventoryItemType;
@@ -23,8 +23,8 @@ function getInventoryItem(trackingNumber) {
 }
 function saveInventoryItem(item) {
 }
-let inventoryItem = getInventoryItem(trackingNumber);
-let updatedInventoryItem = inventoryItem;
+var inventoryItem = getInventoryItem(trackingNumber);
+var updatedInventoryItem = inventoryItem;
 inventoryItem.createDate = new Date();
 saveInventoryItem({
     displayName: "Macbook",
@@ -33,14 +33,15 @@ saveInventoryItem({
     createDate: new Date(),
 });
 function clone(source, options) {
-    const serialized = JSON.stringify(source);
+    var serialized = JSON.stringify(source);
     return JSON.parse(serialized);
 }
-const cloned = clone(inventoryItem, { deep: true });
+var cloned = clone(inventoryItem, { deep: true });
 // Reusing logic with generics 
-class KeyValuePair {
-    Key;
-    Value;
-}
-let keyValue = { Key: "something", Value: 1234 };
-let keyValue2 = { Key: 1234, Value: true };
+var KeyValuePair = /** @class */ (function () {
+    function KeyValuePair() {
+    }
+    return KeyValuePair;
+}());
+var keyValue = { Key: "something", Value: 1234 };
+var keyValue2 = { Key: 1234, Value: true };
