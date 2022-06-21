@@ -1,5 +1,6 @@
 class InventoryStore {
   /** the inventory categories */
+  // Functions with a 'get' to behave like properties
   get categories() {
     return this._categories;
   }
@@ -9,13 +10,20 @@ class InventoryStore {
     return this._items;
   }
 
+  // Can access them like this - this.items
+  // Assign them using setters
+  // set items(value) {
+  //   this._items = value
+  // }
+
   /** promise indicating whether the store has been initialized */
   get isInitialized() {
     return this._isInitialized;
   }
 
+  // Called when initialized 
   constructor() {
-    // define and initialize properties (which happen to be "private")
+    // define and initialize properties (which happen to be "private" - only a naming convention. can still edit) - to ensure only this class can access them
     this._categories = [];
     this._items = [];
 
@@ -151,6 +159,9 @@ class InventoryStore {
    *
    * @private  <-- just information, doesn't actually do anything at runtime
    */
+
+  // Methods are functions that contain logic, it can access all of the internals of the class, rep like 'this' keyword
+
   _load() {
     return Promise.all([
       getFromStorage("Categories"),

@@ -2,8 +2,16 @@ var displayName = "Jess's standing desk";
 var inventoryType = "furniture";
 var trackingNumber = "FD123455";
 var createDate = new Date();
-var originalCost = 425; // avoid the 'any' type
-originalCost = "More spenny";
+// let originalCost: Cost = 425;
+// originalCost = "More spenny"
+// To reassign type but not declare value
+var originalCost;
+if (typeof originalCost === "number") {
+    var cost = originalCost;
+}
+else {
+    var x = originalCost; // which is originally a string
+}
 // Restricting values
 var InventoryItemType;
 (function (InventoryItemType) {

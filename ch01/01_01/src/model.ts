@@ -2,8 +2,22 @@ let displayName: string = "Jess's standing desk";
 let inventoryType: string = "furniture";
 let trackingNumber: string = "FD123455";
 let createDate: Date = new Date();
-let originalCost: any = 425; // avoid the 'any' type
-originalCost = "More spenny"
+// let originalCost: any = 425; avoid the 'any' type
+
+// Allow multiple types
+type Cost = number | string
+// let originalCost: Cost = 425;
+// originalCost = "More spenny"
+
+// To reassign type but not declare value
+let originalCost: Cost;
+
+if (typeof originalCost === "number") {
+  let cost: number = originalCost
+} else {
+  let x = originalCost // which is originally a string
+}
+
 
 // Restricting values
 enum InventoryItemType {
@@ -16,7 +30,7 @@ interface InventoryItem {
   // Populate interface to describe structure
   displayName: string;
   inventoryType: InventoryItemType;
-  // use of literal types - inventoryType: "computer" || "furniture"
+  // use of literal types - inventoryType: "computer" | "furniture"
   readonly trackingNumber: string;
   createDate: Date;
   // ?Optional parameter 
