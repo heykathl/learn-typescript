@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { stringify } from 'querystring';
+import Message from './Message'
 
 function App() {
 
@@ -30,9 +30,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          The value {firstName} is of {typeof firstName} type!
-        </p>
+        <Message />
       </header>
     </div>
   );
