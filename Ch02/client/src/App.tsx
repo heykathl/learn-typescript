@@ -4,14 +4,14 @@ import './App.css';
 import Message from './Message'
 
 class App extends Component<any> {
-  componentWillMount() {
-    // Call this to ensure it is executed prior to rendering
-    console.log('Almost there...')
-  }
+  // componentWillMount() {
+  //   // Call this to ensure it is executed prior to rendering
+  //   console.log('Almost there...')
+  // }
 
-  componentDidMount() {
-    console.log('hello')
-  }
+  // componentDidMount() {
+  //   console.log('hello')
+  // }
 
   // let firstValue: string = "kathleen";
   // let firstValue: number = 21;
@@ -39,7 +39,7 @@ class App extends Component<any> {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <Message message='This is a simple message'/>
+          <Message name="Kathleen" message='This is a simple message'/>
         </header>
       </div>
     );

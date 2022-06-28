@@ -1,8 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-const Message = (prop: {message: string}): any => {
+interface UserMessage {
+  name: string;
+  message: string
+}
+
+const Message = (props: UserMessage): any => {
   return (
-    <p>{prop.message}</p>
+    <p>{props.name}, {props.message}</p>
   )
 }
 
