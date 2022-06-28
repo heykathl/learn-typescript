@@ -9,7 +9,21 @@ function App() {
   // let firstValue: number = 21;
   // let firstValue: boolean = true;
   // let firstValue: number[] = [1,2,3];
-  let firstValue: Array<string> = ['hey', 'bye'];
+  // let firstValue: Array<string> = ['hey', 'bye'];
+
+  // Tuple - an array which can contain multiple types
+  let aTuple: [string, number] = ["Kathleen", 10];
+
+  // Enum - Similar to objects, stores multiple and can be initialized inside
+  enum Codes {first = 1, second = 2};
+
+  // Any - unsure what type of data
+  let firstName: any = 10;
+
+  // Void - Void a return type or function
+  const warning = (): void => {
+    console.log('Warning');
+  }
 
   return (
 
@@ -17,7 +31,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          The value {firstValue} is of {typeof firstValue} type!
+          The value {firstName} is of {typeof firstName} type!
         </p>
       </header>
     </div>
