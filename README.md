@@ -9,3 +9,8 @@
 * Reusing logic with generics
 * Type checking
 * Adding type support for APIs
+* Basic and complex types
+* Functional/stateless components
+* Class/stateful components
+* Interfaces with React and TypeScript
+* Implementing higher-order components
