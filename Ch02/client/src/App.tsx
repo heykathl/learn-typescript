@@ -3,16 +3,11 @@ import logo from './logo.svg';
 import './App.css';
 import Message from './Message'
 
-// Define state
-const initialState = {
-  name: 'Kathleen',
-  message: 'New message'
-}
 
-// Define type of state
-type State = Readonly<typeof initialState>
 
-class App extends Component<any, State> {
+
+
+class App extends Component {
   // componentWillMount() {
   //   // Call this to ensure it is executed prior to rendering
   //   console.log('Almost there...')
@@ -42,16 +37,13 @@ class App extends Component<any, State> {
   //   console.log('Warning');
   // }
 
-  // Expecting state variable to be State type and intialState passed through to use as props
-  readonly state: State = initialState
-
   render() {
     return (
   
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <Message name={this.state.name} message={this.state.message}/>
+          <Message />
         </header>
       </div>
     );
